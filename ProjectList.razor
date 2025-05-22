@@ -1,0 +1,28 @@
+@* Lista de proyectos ficticios *@
+<ul class="project-list">
+    @foreach (var project in Projects)
+    {
+        <li class="project-item">
+            <img src="@project.ImageUrl" alt="Imagen del proyecto" class="project-img" />
+            <div>
+                <strong>@project.Titulo</strong>
+                <p>@project.Descripcion</p>
+            </div>
+        </li>
+    }
+</ul>
+
+@code {
+    class Project
+    {
+        public string Titulo { get; set; }
+        public string Descripcion { get; set; }
+        public string ImageUrl { get; set; }
+    }
+
+    List<Project> Projects = new()
+    {
+        new Project { Titulo = "Proyecto 1", Descripcion = "Descripción del proyecto 1", ImageUrl = "https://via.placeholder.com/80" },
+        new Project { Titulo = "Proyecto 2", Descripcion = "Descripción del proyecto 2", ImageUrl = "https://via.placeholder.com/80" }
+    };
+}

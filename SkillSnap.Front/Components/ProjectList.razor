@@ -1,0 +1,40 @@
+﻿@page "/project-list"
+@rendermode InteractiveServer
+@using Microsoft.AspNetCore.Authorization
+@using SkillSnap.Api.Models
+@using SkillSnap.Front.Services
+@inject ProjectService ProjectService
+@attribute [Authorize]
+
+<ul class="project-list">
+    @if (projects is null)
+    {
+        <li>Cargando proyectos...</li>
+    }
+    else if (projects.Count == 0)
+    {
+        <li>No hay proyectos registrados.</li>
+    }
+    else
+    {
+        @foreach (var project in projects)
+        {
+            <li class="project-item">
+                <img src="@project.ImageUrl" alt="Imagen del proyecto" class="project-img" />
+                <div>
+                    <strong>@project.Título</strong>
+                    <p>@project.Descripción</p>
+                </div>
+            </li>
+        }
+    }
+</ul>
+
+@code {
+    private List<Project>? projects;
+
+    protected override async Task OnInitializedAsync()
+    {
+        projects = await ProjectService.GetProjectsAsync();
+    }
+}

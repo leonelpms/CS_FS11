@@ -1,0 +1,37 @@
+﻿@page "/skill-tags"
+@rendermode InteractiveServer
+
+@using Microsoft.AspNetCore.Authorization
+@using SkillSnap.Api.Models
+@using SkillSnap.Front.Services
+@inject SkillService SkillService
+@attribute [Authorize]
+
+<h3>SkillTags</h3>
+
+<div class="skill-tags">
+    @if (skills is null)
+    {
+        <span>Cargando habilidades...</span>
+    }
+    else if (skills.Count == 0)
+    {
+        <span>No hay habilidades registradas.</span>
+    }
+    else
+    {
+        @foreach (var skill in skills)
+        {
+            <span class="badge bg-primary me-1">@skill.Nombre (@skill.Nivel)</span>
+        }
+    }
+</div>
+
+@code {
+    private List<Skill>? skills;
+
+    protected override async Task OnInitializedAsync()
+    {
+        skills = await SkillService.GetSkillsAsync();
+    }
+}

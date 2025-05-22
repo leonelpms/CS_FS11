@@ -1,0 +1,14 @@
+@* Muestra el nombre, biografía y foto de perfil de un usuario *@
+<div class="card profile-card">
+    <img src="@ProfileImageUrl" alt="Foto de perfil" class="profile-img" />
+    <div class="card-body">
+        <h3>@Nombre</h3>
+        <p>@Bio</p>
+    </div>
+</div>
+
+@code {
+    [Parameter] public string Nombre { get; set; }
+    [Parameter] public string Bio { get; set; }
+    [Parameter] public string ProfileImageUrl { get; set; }
+}
